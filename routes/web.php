@@ -15,7 +15,7 @@ use App\Http\Controllers\backend\DashboardController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 // ==================== LOGIN ====================
@@ -39,11 +39,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
-
 });
 
 
 // ==================== FRONTEND ====================
-
-
-
