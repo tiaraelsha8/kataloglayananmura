@@ -9,14 +9,11 @@ use App\Http\Controllers\auth\ResetPasswordController;
 
 // BACKEND
 use App\Http\Controllers\backend\DashboardController;
-<<<<<<< HEAD
 use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\backend\ProfileController;
-=======
 use App\Http\Controllers\backend\CarouselController;
 use App\Http\Controllers\backend\KontakController;
 
->>>>>>> magang
 
 // FRONTEND
 
