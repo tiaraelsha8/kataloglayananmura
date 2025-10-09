@@ -9,6 +9,7 @@ use App\Http\Controllers\auth\ResetPasswordController;
 
 // BACKEND
 use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\backend\CarouselController;
 
 
 // FRONTEND
@@ -41,6 +42,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
 
 });
+
+    Route::resource('/carousel', CarouselController::class);
+
 
 
 // ==================== FRONTEND ====================
