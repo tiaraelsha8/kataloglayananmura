@@ -9,7 +9,8 @@ use App\Http\Controllers\auth\ResetPasswordController;
 
 // BACKEND
 use App\Http\Controllers\backend\DashboardController;
-
+use App\Http\Controllers\backend\KategoriController;
+use App\Http\Controllers\backend\LayananController;
 
 // FRONTEND
 
@@ -40,10 +41,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
 
+    Route::resource('kategori', KategoriController::class);
+
+    Route::resource('layanan', LayananController::class);
 });
 
 
 // ==================== FRONTEND ====================
-
-
-

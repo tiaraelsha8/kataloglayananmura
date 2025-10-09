@@ -26,7 +26,7 @@
 
           {{-- MENU KATALOG (Muncul untuk semua role) --}}
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Katalog
@@ -35,13 +35,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('kategori.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kategori</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('layanan.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Layanan</p>
                 </a>
