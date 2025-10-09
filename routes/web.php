@@ -41,11 +41,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
+    
     Route::resource('/kontak', KontakController::class);
+    
+    Route::resource('/carousel', CarouselController::class);
 
 });
 
-    Route::resource('/carousel', CarouselController::class);
 
 
 
