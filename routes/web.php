@@ -10,8 +10,7 @@ use App\Http\Controllers\auth\ResetPasswordController;
 // BACKEND
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\UserController;
-
-
+use App\Http\Controllers\backend\ProfileController;
 
 // FRONTEND
 
@@ -41,6 +40,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
+
+    Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::resource('/user', UserController::class);
 
