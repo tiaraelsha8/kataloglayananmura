@@ -1,4 +1,4 @@
-@extends('backend.layout.master')
+@extends('backend.layouts.master')
 
 @section('judul')
     Halaman Kelola Kontak
