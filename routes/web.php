@@ -10,6 +10,7 @@ use App\Http\Controllers\auth\ResetPasswordController;
 // BACKEND
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\CarouselController;
+use App\Http\Controllers\backend\KontakController;
 
 
 // FRONTEND
@@ -40,6 +41,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
+    Route::resource('/kontak', KontakController::class);
 
 });
 
