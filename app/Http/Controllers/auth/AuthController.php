@@ -20,7 +20,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-     // Proses login
+    // Proses login
     public function login(Request $request)
     {
         // ✅ Validasi input + reCAPTCHA
@@ -48,13 +48,20 @@ class AuthController extends Controller
         // ✅ Ambil credential username & password saja (tanpa CAPTCHA!)
         $credentials = $request->only('username', 'password');
 
-        // Proses login
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             RateLimiter::clear($key); // Clear hitungan jika berhasil login
 
-            session(['username' => Auth::user()->username]);
-            return redirect()->route('backend.dashboard');
+            $user = Auth::user(); // ✅ ambil user aktif
+
+            // ✅ Arahkan sesuai role
+            if ($user->role === 'superadmin') {
+                return redirect()->route('backend.dashboard')->with('success', 'Selamat datang Superadmin!');
+            } elseif ($user->role === 'admin') {
+                return redirect()->route('backend.dashboard')->with('success', 'Selamat datang Admin!');
+            } else {
+                abort(403, 'Akses tidak diizinkan');
+            }
         }
 
         // Gagal login, tambah hitungan rate limit
