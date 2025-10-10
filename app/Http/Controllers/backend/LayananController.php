@@ -37,7 +37,7 @@ class LayananController extends Controller
             'nama_layanan' => 'required|string|max:100',
             'kategori_id' => 'required|exists:kategoris,id',
             'link' => 'required|string|max:100',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto' => 'nullable|image|mimes:png|max:2048',
         ]);
         
         //upload image
@@ -88,7 +88,7 @@ class LayananController extends Controller
             'nama_layanan' => 'required|string|max:100',
             'kategori_id' => 'required|exists:kategoris,id',
             'link' => 'required|string|max:250',
-            'foto' => 'image|mimes:jpg,jpeg,png|max:2048',
+            'foto' => 'image|mimes:png|max:2048',
         ]);
 
         //get product by ID

@@ -76,7 +76,7 @@ class KategoriController extends Controller
         //validate form
         $request->validate([
             'nama_kategori' => 'required|string|max:100',
-            'foto' => 'image|mimes:jpg,jpeg,png|max:2048',
+            'foto' => 'image|mimes:png|max:2048',
         ]);
 
         //get product by ID

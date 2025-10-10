@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('judul')
-    Halaman Tambah Pegawai
+    Halaman Tambah Layanan
 @endsection
 
 @section('content')
@@ -45,6 +45,7 @@
                     <div class="form-group">
                         <label for="image">Foto</label>
                         <input type="file" class="form-control-file" name="foto" accept="image/*">
+                        <p>png. max 2 MB</p>
                     </div>
                     @error('foto')
                         <div class="alert alert-danger">{{ $message }}</div>
