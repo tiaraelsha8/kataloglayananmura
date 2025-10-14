@@ -10,12 +10,21 @@ use App\Http\Controllers\auth\ResetPasswordController;
 // BACKEND
 use App\Http\Controllers\backend\DashboardController;
 
-
 // FRONTEND
+use App\Http\Controllers\frontend\HomeController;
 
+Route::get('/', [HomeController::class, 'index'])->name('beranda');
 
-Route::get('/', function () {
-    return view('home');
+// KATEGORI LAYANAN
+use Illuminate\Support\Str;
+
+Route::get('/layanan/{slug}', function ($slug) {
+    $viewPath = 'frontend.layanan.' . $slug;
+    if (view()->exists($viewPath)) {
+        return view($viewPath);
+    } else {
+        abort(404);
+    }
 });
 
 // ==================== LOGIN ====================
@@ -36,10 +45,10 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // ==================== BACKEND ====================
-Route::prefix('admin')->middleware('auth')->group(function () {
-
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
-});
-
+Route::prefix('admin')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
+    });
 
 // ==================== FRONTEND ====================
