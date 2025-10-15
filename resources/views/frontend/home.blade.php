@@ -130,46 +130,24 @@
 
     {{-- === Carousel === --}}
 @section('carousel')
-    <div class="carousel-slide active">
-        <img src="{{ asset('templateadmin/dist/img/slide1.jpg') }}" alt="Slide 1">
-    </div>
-    <div class="carousel-slide">
-        <img src="{{ asset('templateadmin/dist/img/slide2.jpg') }}" alt="Slide 2">
-    </div>
-    <div class="carousel-slide">
-        <img src="{{ asset('templateadmin/dist/img/slide3.jpg') }}" alt="Slide 3">
-    </div>
-    <div class="carousel-slide">
-        <img src="{{ asset('templateadmin/dist/img/slide4.jpg') }}" alt="Slide 4">
-    </div>
-    <div class="carousel-slide">
-        <img src="{{ asset('templateadmin/dist/img/slide5.jpg') }}" alt="Slide 5">
-    </div>
+    @forelse ($carousel as $item)
+        <div class="carousel-slide">
+            <img src="{{ $item->foto ? asset('storage/carousel/' . $item->foto) : asset('asset/lambang_mura.png') }}" alt="{{ $item->id }}">
+        </div>
+    @empty
+        <p>Belum ada data</p>
+    @endforelse
 @endsection
 
 {{-- === Kategori Layanan === --}}
 <div class="title-wrapper">
     <h2 class="section-title text-center">Layanan</h2>
     <div class="service-grid">
-        @php
-            $layananStatis = [
-                ['icon' => '🏛️', 'nama' => 'Kependudukan'],
-                ['icon' => '🎓', 'nama' => 'Pendidikan'],
-                ['icon' => '🏥', 'nama' => 'Kesehatan'],
-                ['icon' => '⚖️', 'nama' => 'Hukum'],
-                ['icon' => '🧾', 'nama' => 'Pajak & Retribusi'],
-                ['icon' => '🌴', 'nama' => 'Pariwisata'],
-                ['icon' => '💼', 'nama' => 'Penanaman Modal'],
-                ['icon' => '🛒', 'nama' => 'Perdagangan'],
-                ['icon' => '🏠', 'nama' => 'Pemerintahan'],
-                ['icon' => '✨', 'nama' => 'Lainnya'],
-            ];
-        @endphp
         @foreach ($kategoris as $item)
             @php $slug = Str::slug($item['nama']); @endphp
             <a href="{{ route('Layanan.read', $item->id) }}" class="service-item" style="text-decoration:none;">
                 <img src="{{ $item->foto ? asset('storage/kategori/' . $item->foto) : asset('asset/lambang_mura.png') }}"
-                                                style="width:300px; height:200px; object-fit:contain;">
+                    style="width:300px; height:200px; object-fit:contain;">
                 <p class="service-name">{{ $item->nama_kategori }}</p>
             </a>
         @endforeach
@@ -229,8 +207,7 @@
                         <div class="card-body d-flex flex-column">
                             <div class="small text-muted mb-1">{{ $date }}</div>
                             <h2 class="h6">
-                                <a href=""
-                                    class="stretched-link text-decoration-none">
+                                <a href="" class="stretched-link text-decoration-none">
                                     {{ $title }}
                                 </a>
                             </h2>
