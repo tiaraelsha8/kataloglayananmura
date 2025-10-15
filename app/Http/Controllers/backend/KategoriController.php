@@ -41,7 +41,7 @@ class KategoriController extends Controller
         $image = $request->file('foto');
         $fotoName = null;
         if ($image) {
-            $image->storeAs('layanan', $image->hashName());
+            $image->storeAs('kategori', $image->hashName());
             $fotoName = $image->hashName();
         }
 
