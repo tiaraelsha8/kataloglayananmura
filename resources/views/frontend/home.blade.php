@@ -168,7 +168,7 @@
                     <div class="card-body d-flex flex-column">
                         <div class="small text-muted mb-1">{{ $it['date'] }}</div>
                         <h2 class="h6 mb-2 clamp-2">
-                            <a class="stretched-link link-anim" href="{{ $it['link'] }}" target="_blank">>
+                            <a class="stretched-link link-anim" href="{{ $it['link'] }}" target="_blank">
                                 {{ $it['title'] }}
                             </a>
                         </h2>
@@ -200,7 +200,7 @@
                         <div class="card-body d-flex flex-column">
                             <div class="small text-muted mb-1">{{ $it['date'] }}</div>
                             <h2 class="h6">
-                                <a href="" class="stretched-link text-decoration-none">
+                                <a href="{{ $it['link'] }}" target="_blank" class="stretched-link text-decoration-none">
                                     {{ $it['title'] }}
                                 </a>
                             </h2>
