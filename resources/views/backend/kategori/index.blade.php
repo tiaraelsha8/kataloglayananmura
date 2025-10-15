@@ -50,7 +50,7 @@
                           <td>{{$key + 1}}</td>
                           <td>{{$value->nama_kategori}}</td>
                           <td>
-                            <img src="{{ asset('storage/kategori/'.$value->foto) }}" style="width:300px; height:200px; object-fit:contain;">
+                            <img src="{{ $value->foto ? asset('storage/kategori/' . $value->foto) : asset('asset/lambang_mura.png') }}" style="width:300px; height:200px; object-fit:contain;">
                           </td>
                           <td>
                             <form action="{{ route('kategori.destroy', $value->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">

@@ -39,12 +39,16 @@ class KategoriController extends Controller
 
         //upload image
         $image = $request->file('foto');
-        $image->storeAs('kategori', $image->hashName());
+        $fotoName = null;
+        if ($image) {
+            $image->storeAs('layanan', $image->hashName());
+            $fotoName = $image->hashName();
+        }
 
-        //create Logo
+        //create Kategori
         Kategori::create([
             'nama_kategori' => $request->nama_kategori,
-            'foto' => $image->hashName(),
+            'foto' => $fotoName,
         ]);
 
         //redirect to index

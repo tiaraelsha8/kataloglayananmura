@@ -53,7 +53,7 @@
                                         <td>{{ $value->link }}</td>
 
                                         <td>
-                                            <img src="{{ asset('storage/layanan/' . $value->foto) }}"
+                                            <img src="{{ $value->foto ? asset('storage/layanan/' . $value->foto) : asset('asset/lambang_mura.png') }}"
                                                 style="width:300px; height:200px; object-fit:contain;">
                                         </td>
                                         <td>
