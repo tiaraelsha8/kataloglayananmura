@@ -168,7 +168,7 @@
                     <div class="card-body d-flex flex-column">
                         <div class="small text-muted mb-1">{{ $it['date'] }}</div>
                         <h2 class="h6 mb-2 clamp-2">
-                            <a class="stretched-link link-anim" href="">
+                            <a class="stretched-link link-anim" href="{{ $it['link'] }}" target="_blank">>
                                 {{ $it['title'] }}
                             </a>
                         </h2>
@@ -189,29 +189,22 @@
     <div class="title-wrapper">
         <h2 class="section-title text-center">Pengumuman Terbaru Murung Raya</h2>
         <div class="row g-3">
-            @forelse($pengumuman ?? [] as $item)
-                @php
-                    $title = strip_tags(data_get($item, 'title.rendered', 'Tanpa Judul'));
-                    $id = data_get($item, 'id');
-                    $img = data_get($item, '_embedded.wp:featuredmedia.0.source_url');
-                    $dateRaw = data_get($item, 'date');
-                    $date = $dateRaw ? \Carbon\Carbon::parse($dateRaw)->translatedFormat('d M Y') : '-';
-                    $excerpt = \Illuminate\Support\Str::limit(strip_tags(data_get($item, 'excerpt.rendered', '')), 160);
-                @endphp
+            @forelse($pengumuman ?? [] as $it)
+
                 <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up">
                     <div class="card h-100 shadow-sm border-0">
-                        @if ($img)
-                            <img src="{{ $img }}" class="card-img-top" alt="{{ $title }}"
+                        @if ($it['image'])
+                            <img src="{{ $it['image'] }}" class="card-img-top" alt="{{ $it['title'] }}"
                                 loading="lazy">
                         @endif
                         <div class="card-body d-flex flex-column">
-                            <div class="small text-muted mb-1">{{ $date }}</div>
+                            <div class="small text-muted mb-1">{{ $it['date'] }}</div>
                             <h2 class="h6">
                                 <a href="" class="stretched-link text-decoration-none">
-                                    {{ $title }}
+                                    {{ $it['title'] }}
                                 </a>
                             </h2>
-                            <p class="text-secondary mb-0">{{ $excerpt }}</p>
+                            <p class="text-secondary mb-0">{{ $it['excerpt'] }}</p>
                         </div>
                     </div>
                 </div>
