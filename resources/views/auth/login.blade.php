@@ -18,7 +18,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('image/logo/logo-komdigi.png') }}">
     <!-- Google reCAPTCHA Script -->
-    {{-- {!! NoCaptcha::renderJs() !!} --}}
+    {!! NoCaptcha::renderJs() !!}
 </head>
 
 <body class="hold-transition login-page">
@@ -70,12 +70,12 @@
                     </div>
 
                     {{-- ✅ reCAPTCHA --}}
-                    {{-- <div class="mb-3">
+                    <div class="mb-3">
                         {!! NoCaptcha::display() !!}
                         @error('g-recaptcha-response')
                             <div class="text-danger small mt-1">{{ $message }}</div>
                         @enderror
-                    </div> --}}
+                    </div>
 
                     <div class="col-6 d-flex gap-3" style="padding-left: 0px">
                         <button type="submit" class="btn btn-primary btn-block w-60 text-nowrap">Masuk</button>
