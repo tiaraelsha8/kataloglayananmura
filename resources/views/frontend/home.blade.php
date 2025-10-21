@@ -281,15 +281,16 @@
     </style>
 
     {{-- === Carousel === --}}
-@section('carousel')
-    @forelse ($carousel as $item)
-        <div class="carousel-slide">
-            <img src="{{ $item->foto ? asset('storage/carousel/' . $item->foto) : asset('asset/lambang_mura.png') }}" alt="{{ $item->id }}">
-        </div>
-    @empty
-        <p>Belum ada data</p>
-    @endforelse
-@endsection
+    <div class="carousel-container">
+        @forelse ($carousel as $item)
+            <div class="carousel-slide">
+                <img src="{{ $item->foto ? asset('storage/carousel/' . $item->foto) : asset('asset/lambang_mura.png') }}"
+                    alt="{{ $item->id }}">
+            </div>
+        @empty
+            <p>Belum ada data</p>
+        @endforelse
+    </div>
 
     {{-- === Kategori Layanan === --}}
     <div>
@@ -342,7 +343,6 @@
     <section class="global-section">
         <div class="announcement-grid">
             @forelse($pengumuman ?? [] as $it)
-
                 <div class="card-wrapper" data-aos="fade-up">
                     <div class="announcement-card">
                         @if ($it['image'])
