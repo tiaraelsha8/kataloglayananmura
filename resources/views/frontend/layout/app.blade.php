@@ -29,28 +29,34 @@
             font-weight: 600;
             letter-spacing: 0.3px;
             color: #08075a;
+            margin: 0;
         }
 
         p {
             font-size: 15px;
             color: white;
             line-height: 1.8;
+            margin: 0;
         }
 
         a {
             text-decoration: none;
+            margin: 0;
         }
 
-        .title-wrapper {
-            padding: 50px;
+        .global-section {
+            justify-content: center;
+            overflow: hidden;
+            padding: 25px 40px;
+            margin: 25px 0;
         }
 
         .section-title {
+            margin-top: 50px;
             text-align: center;
             font-size: 2.3rem;
             font-weight: 600;
             color: #555;
-            margin-bottom: 50px;
             text-transform: none;
             letter-spacing: normal;
         }
@@ -108,63 +114,69 @@
             transform: translateY(-2px);
         }
 
-        /* === Carousel === */
-        .carousel-container {
+        /* === Halaman Layanan=== */
+        .layanan-hero {
+            margin-top: 75px;
+            margin-bottom: 75px;
             position: relative;
             width: 100%;
-            height: 88vh;
-            overflow: hidden;
-            margin-top: 75px;
-        }
-
-        .carousel-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 1.2s ease, transform 1.2s ease;
-        }
-
-        .carousel-slide.active {
-            opacity: 1;
-            transform: scale(1);
-            z-index: 1;
-        }
-
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* === Layout Ikon === */
-        .icon-section {
+            min-height: 40vh;
             display: flex;
+            align-items: center;
             justify-content: center;
-            padding: 60px;
+            text-align: center;
+            background: url('{{ asset('templateadmin/dist/img/layananbg.jpg') }}') no-repeat center center;
+            background-size: 100% auto;
             overflow: hidden;
+        }
+
+        .layanan-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 0;
+        }
+
+        .layanan-hero-content {
+            position: relative;
+            z-index: 1;
+            color: #fff;
+            padding: 40px 20px;
+            max-width: 900px;
+        }
+
+        .layanan-hero-content h1 {
+            font-size: 2.5rem;
+            color: #f0f0f0;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .layanan-hero-content p {
+            font-size: 0.90rem;
+            color: #f0f0f0;
+            margin: 0;
         }
 
         .icon-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            max-width: 900px;
-            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 25px;
+            width: calc(100% - 40px);
+            justify-items: center;
         }
 
         .icon-item {
-            flex: 0 1 calc(20% - 40px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            width: 100%;
+            max-width: 250px;
+            background: none;
+            flex-direction: none;
+            border: none;
+            cursor: pointer;
             opacity: 0;
-            transform: scale(0.8) translateY(25px);
+            transform: translateY(30px);
+            text-align: center;
+            transition: all 0.3s ease;
             animation: appearFromCenter 0.6s ease forwards;
         }
 
@@ -221,12 +233,14 @@
         }
 
         .icon-image {
-            width: 70px;
-            height: 70px;
-            border-radius: 14px;
-            background: #fff;
-            padding: 12px;
+            width: 65px;
+            height: 65px;
+            margin-bottom: 10px;
+            background: none;
             object-fit: contain;
+            transform-origin: center center;
+            backface-visibility: hidden;
+            will-change: transform;
             transition: transform 0.3s ease;
         }
 
@@ -235,10 +249,15 @@
         }
 
         .icon-title {
-            font-size: 14px;
+            font-size: 0.9rem;
             font-weight: 600;
+            color: #000;
+            font-family: inherit;
+            transition: color 0.3s ease;
+        }
+
+        .icon-item:hover .icon-title {
             color: #08075a;
-            margin-top: 10px;
         }
 
         /* ========== Footer ========== */
@@ -342,11 +361,6 @@
     {{-- Header --}}
     @include('frontend.partial.header')
 
-    <!-- ===== Carousel Global ===== -->
-    <div class="carousel-container">
-        @yield('carousel')
-    </div>
-
     {{-- Konten halaman --}}
     <main>
         @yield('content')
@@ -364,23 +378,6 @@
             } else {
                 header.classList.remove('scrolled');
             }
-        });
-
-        // === Carousel ===
-        document.addEventListener("DOMContentLoaded", () => {
-            const slides = document.querySelectorAll(".carousel-slide");
-            let index = 0;
-            setInterval(() => {
-                slides[index].classList.remove("active");
-                index = (index + 1) % slides.length;
-                slides[index].classList.add("active");
-            }, 4000);
-        });
-
-        document.addEventListener('beforeunload', () => {
-            document.querySelectorAll('.icon-item').forEach(icon => {
-                icon.style.animation = 'disappearToCenter 0.5s ease forwards';
-            });
         });
     </script>
 </body>

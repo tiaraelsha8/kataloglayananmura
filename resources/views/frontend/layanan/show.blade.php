@@ -2,13 +2,23 @@
 @section('title', 'Layanan Kesehatan')
 
 @section('content')
-    <div class="title-wrapper">
-        <h1 class="section-title">{{ $kategoris->nama_kategori }}</h1>
-        {{-- <p>Pelayanan kesehatan masyarakat, program imunisasi, dan layanan puskesmas.</p> --}}
-    </div>
-    <section class="icon-section">
-        <div class="icon-grid">
 
+    {{-- === Hero Section (pakai class global)  === --}}
+    <div class="layanan-hero">
+        <div class="layanan-overlay"></div>
+        <div class="layanan-hero-content">
+            <h1>{{ $kategoris->nama_kategori }}</h1>
+            <p>Beranda > Layanan > {{ $kategoris->nama_kategori }}</p>
+        </div>
+    </div>
+
+    {{-- === Konten utama (pakai class global) === --}}
+    <div>
+        <h1 class="section-title">{{ $kategoris->nama_kategori }}</h1>
+    </div>
+
+    <section class="global-section">
+        <div class="icon-grid">
             @forelse ($kategoris->layanans as $item)
                 <a href="{{ $item->link }}">
                     <div class="icon-item">

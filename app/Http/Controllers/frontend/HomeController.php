@@ -41,7 +41,7 @@ class HomeController extends Controller
             ],
         );
 
-        return view('frontend.home', compact('berita', 'pengumuman','kategoris'));
+        return view('frontend.home', compact('berita', 'pengumuman', 'kategoris'));
     }
 
     public function read(string $id)
