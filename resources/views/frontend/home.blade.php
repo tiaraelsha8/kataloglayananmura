@@ -284,123 +284,123 @@
 @section('carousel')
     @forelse ($carousel as $item)
         <div class="carousel-slide">
-            <img src="{{ $item->foto ? asset('storage/carousel/' . $item->foto) : asset('asset/lambang_mura.png') }}" alt="{{ $item->id }}">
+            <img src="{{ $item->foto ? asset('storage/carousel/' . $item->foto) : asset('asset/lambang_mura.png') }}"
+                alt="{{ $item->id }}">
         </div>
     @empty
         <p>Belum ada data</p>
     @endforelse
 @endsection
 
-    {{-- === Kategori Layanan === --}}
-    <div>
-        <h2 class="section-title">Layanan</h2>
+{{-- === Kategori Layanan === --}}
+<div>
+    <h2 class="section-title">Layanan</h2>
+</div>
+<section class="global-section">
+    <div class="service-grid">
+        @foreach ($kategoris as $item)
+            @php $slug = Str::slug($item['nama']); @endphp
+            <a href="{{ route('Layanan.read', $item->id) }}" class="service-item">
+                <img
+                    src="{{ $item->foto ? asset('storage/kategori/' . $item->foto) : asset('asset/lambang_mura.png') }}">
+                <p class="service-name">{{ $item->nama_kategori }}</p>
+            </a>
+        @endforeach
     </div>
-    <section class="global-section">
-        <div class="service-grid">
-            @foreach ($kategoris as $item)
-                @php $slug = Str::slug($item['nama']); @endphp
-                <a href="{{ route('Layanan.read', $item->id) }}" class="service-item">
-                    <img
-                        src="{{ $item->foto ? asset('storage/kategori/' . $item->foto) : asset('asset/lambang_mura.png') }}">
-                    <p class="service-name">{{ $item->nama_kategori }}</p>
-                </a>
-            @endforeach
-        </div>
-    </section>
+</section>
 
-    {{-- === Berita === --}}
-    <div>
-        <h2 class="section-title">Berita Terbaru Murung Raya</h2>
-    </div>
-    <section class="global-section">
-        <div class="card-grid">
-            @forelse($berita ?? [] as $it)
-                <div class="card-wrapper" data-aos="fade-up">
-                    <div class="card card-elev">
-                        @if ($it['image'])
-                            <img src="{{ $it['image'] }}" class="card-img-top" alt="{{ $it['title'] }}" loading="lazy">
-                        @endif
-                        <div class="card-body">
-                            <div class="card-date">{{ $it['date'] }}</div>
-                            <h2 class="card-title clamp-2">
-                                <a href="" class="card-link">{{ $it['title'] }}</a>
-                            </h2>
-                            <p class="card-excerpt clamp-3">{{ $it['excerpt'] }}</p>
-                        </div>
+{{-- === Berita === --}}
+<div>
+    <h2 class="section-title">Berita Terbaru Murung Raya</h2>
+</div>
+<section class="global-section">
+    <div class="card-grid">
+        @forelse($berita ?? [] as $it)
+            <div class="card-wrapper" data-aos="fade-up">
+                <div class="card card-elev">
+                    @if ($it['image'])
+                        <img src="{{ $it['image'] }}" class="card-img-top" alt="{{ $it['title'] }}" loading="lazy">
+                    @endif
+                    <div class="card-body">
+                        <div class="card-date">{{ $it['date'] }}</div>
+                        <h2 class="card-title clamp-2">
+                            <a href="" class="card-link">{{ $it['title'] }}</a>
+                        </h2>
+                        <p class="card-excerpt clamp-3">{{ $it['excerpt'] }}</p>
                     </div>
                 </div>
-            @empty
-                <p class="text-center">Belum ada berita.</p>
-            @endforelse
-        </div>
-    </section>
-
-    {{-- === Pengumuman === --}}
-    <div>
-        <h2 class="section-title">Pengumuman Terbaru Murung Raya</h2>
+            </div>
+        @empty
+            <p class="text-center">Belum ada berita.</p>
+        @endforelse
     </div>
-    <section class="global-section">
-        <div class="announcement-grid">
-            @forelse($pengumuman ?? [] as $it)
+</section>
 
-                <div class="card-wrapper" data-aos="fade-up">
-                    <div class="announcement-card">
-                        @if ($it['image'])
-                            <img src="{{ $it['image'] }}" alt="{{ $it['title'] }}" loading="lazy"
-                                class="announcement-img">
-                        @endif
-                        <div class="announcement-body">
-                            <div class="announcement-date">{{ $it['date'] }}</div>
-                            <h2 class="announcement-title">
-                                <a href="" class="announcement-link">{{ $it['title'] }}</a>
-                            </h2>
-                            <p class="announcement-excerpt">{{ $it['excerpt'] }}</p>
-                        </div>
+{{-- === Pengumuman === --}}
+<div>
+    <h2 class="section-title">Pengumuman Terbaru Murung Raya</h2>
+</div>
+<section class="global-section">
+    <div class="announcement-grid">
+        @forelse($pengumuman ?? [] as $it)
+            <div class="card-wrapper" data-aos="fade-up">
+                <div class="announcement-card">
+                    @if ($it['image'])
+                        <img src="{{ $it['image'] }}" alt="{{ $it['title'] }}" loading="lazy"
+                            class="announcement-img">
+                    @endif
+                    <div class="announcement-body">
+                        <div class="announcement-date">{{ $it['date'] }}</div>
+                        <h2 class="announcement-title">
+                            <a href="" class="announcement-link">{{ $it['title'] }}</a>
+                        </h2>
+                        <p class="announcement-excerpt">{{ $it['excerpt'] }}</p>
                     </div>
                 </div>
-            @empty
-                <p class="text-center">Belum ada pengumuman.</p>
-            @endforelse
-        </div>
-    </section>
+            </div>
+        @empty
+            <p class="text-center">Belum ada pengumuman.</p>
+        @endforelse
+    </div>
+</section>
 
-    {{-- === Script AOS === --}}
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            once: true,
-            duration: 650,
-            offset: 80,
-            easing: 'ease-out-cubic'
-        });
+{{-- === Script AOS === --}}
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        once: true,
+        duration: 650,
+        offset: 80,
+        easing: 'ease-out-cubic'
+    });
 
-        // === Carousel ===
-        document.addEventListener("DOMContentLoaded", () => {
-            const slides = document.querySelectorAll(".carousel-slide");
-            let index = 0;
-            setInterval(() => {
-                slides[index].classList.remove("active");
-                index = (index + 1) % slides.length;
-                slides[index].classList.add("active");
-            }, 4000);
-        });
+    // === Carousel ===
+    document.addEventListener("DOMContentLoaded", () => {
+        const slides = document.querySelectorAll(".carousel-slide");
+        let index = 0;
+        setInterval(() => {
+            slides[index].classList.remove("active");
+            index = (index + 1) % slides.length;
+            slides[index].classList.add("active");
+        }, 4000);
+    });
 
-        document.addEventListener('beforeunload', () => {
-            document.querySelectorAll('.icon-item').forEach(icon => {
-                icon.style.animation = 'disappearToCenter 0.5s ease forwards';
-            });
+    document.addEventListener('beforeunload', () => {
+        document.querySelectorAll('.icon-item').forEach(icon => {
+            icon.style.animation = 'disappearToCenter 0.5s ease forwards';
         });
+    });
 
-        // Animasi muncul untuk kategori layanan
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => entry.target.classList.add('visible'), i * 100);
-                }
-            });
-        }, {
-            threshold: 0.2
+    // Animasi muncul untuk kategori layanan
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 100);
+            }
         });
-        document.querySelectorAll('.service-item').forEach(item => observer.observe(item));
-    </script>
+    }, {
+        threshold: 0.2
+    });
+    document.querySelectorAll('.service-item').forEach(item => observer.observe(item));
+</script>
 @endsection
