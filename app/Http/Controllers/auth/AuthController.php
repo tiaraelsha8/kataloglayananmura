@@ -23,15 +23,15 @@ class AuthController extends Controller
     // Proses login
     public function login(Request $request)
     {
-        // ✅ Validasi input + reCAPTCHA
-        // $request->validate([
-        //     'username' => 'required',
-        //     'password' => 'required',
-        //     'g-recaptcha-response' => 'required|captcha',
-        // ], [
-        //     'g-recaptcha-response.required' => 'Please verify that you are not a robot.',
-        //     'g-recaptcha-response.captcha' => 'Captcha error! try again later or contact site admin.',
-        // ]);
+        //✅ Validasi input + reCAPTCHA
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+            'g-recaptcha-response' => 'required|captcha',
+        ], [
+            'g-recaptcha-response.required' => 'Please verify that you are not a robot.',
+            'g-recaptcha-response.captcha' => 'Captcha error! try again later or contact site admin.',
+        ]);
 
         // Buat key berdasarkan IP dan username untuk rate limit
         $key = Str::lower($request->input('username')) . '|' . $request->ip();

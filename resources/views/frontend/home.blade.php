@@ -281,23 +281,15 @@
     </style>
 
     {{-- === Carousel === --}}
-    <div class="carousel-container">
-        <div class="carousel-slide active">
-            <img src="{{ asset('templateadmin/dist/img/slide1.jpg') }}" alt="Slide 1">
-        </div>
+@section('carousel')
+    @forelse ($carousel as $item)
         <div class="carousel-slide">
-            <img src="{{ asset('templateadmin/dist/img/slide2.jpg') }}" alt="Slide 2">
+            <img src="{{ $item->foto ? asset('storage/carousel/' . $item->foto) : asset('asset/lambang_mura.png') }}" alt="{{ $item->id }}">
         </div>
-        <div class="carousel-slide">
-            <img src="{{ asset('templateadmin/dist/img/slide3.jpg') }}" alt="Slide 3">
-        </div>
-        <div class="carousel-slide">
-            <img src="{{ asset('templateadmin/dist/img/slide4.jpg') }}" alt="Slide 4">
-        </div>
-        <div class="carousel-slide">
-            <img src="{{ asset('templateadmin/dist/img/slide5.jpg') }}" alt="Slide 5">
-        </div>
-    </div>
+    @empty
+        <p>Belum ada data</p>
+    @endforelse
+@endsection
 
     {{-- === Kategori Layanan === --}}
     <div>
@@ -349,27 +341,20 @@
     </div>
     <section class="global-section">
         <div class="announcement-grid">
-            @forelse($pengumuman ?? [] as $item)
-                @php
-                    $title = strip_tags(data_get($item, 'title.rendered', 'Tanpa Judul'));
-                    $id = data_get($item, 'id');
-                    $img = data_get($item, '_embedded.wp:featuredmedia.0.source_url');
-                    $dateRaw = data_get($item, 'date');
-                    $date = $dateRaw ? \Carbon\Carbon::parse($dateRaw)->translatedFormat('d M Y') : '-';
-                    $excerpt = \Illuminate\Support\Str::limit(strip_tags(data_get($item, 'excerpt.rendered', '')), 160);
-                @endphp
+            @forelse($pengumuman ?? [] as $it)
+
                 <div class="card-wrapper" data-aos="fade-up">
                     <div class="announcement-card">
-                        @if ($img)
-                            <img src="{{ $img }}" alt="{{ $title }}" loading="lazy"
+                        @if ($it['image'])
+                            <img src="{{ $it['image'] }}" alt="{{ $it['title'] }}" loading="lazy"
                                 class="announcement-img">
                         @endif
                         <div class="announcement-body">
-                            <div class="announcement-date">{{ $date }}</div>
+                            <div class="announcement-date">{{ $it['date'] }}</div>
                             <h2 class="announcement-title">
-                                <a href="" class="announcement-link">{{ $title }}</a>
+                                <a href="" class="announcement-link">{{ $it['title'] }}</a>
                             </h2>
-                            <p class="announcement-excerpt">{{ $excerpt }}</p>
+                            <p class="announcement-excerpt">{{ $it['excerpt'] }}</p>
                         </div>
                     </div>
                 </div>

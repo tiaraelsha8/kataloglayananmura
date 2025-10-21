@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Carousel;
 use App\Models\Kategori;
 use App\Models\Layanan;
 use Illuminate\Support\Facades\Http;
@@ -15,6 +16,7 @@ class HomeController extends Controller
     public function index()
     {
         $kategoris = Kategori::with('layanans')->get();
+        $carousel = Carousel::latest()->get();
         // === BERITA 10 terbaru ===
         $beritaRes = Http::acceptJson()->get(config('services.wp_berita.base', 'https://berita.murungrayakab.go.id/wp-json/wp/v2/posts'), ['_embed' => 1, 'per_page' => 10, 'page' => 1]);
 
@@ -22,6 +24,7 @@ class HomeController extends Controller
             fn($p) => [
                 'id' => $p['id'],
                 'title' => strip_tags(data_get($p, 'title.rendered', 'Tanpa Judul')),
+                'link' => $p['link'],
                 'image' => data_get($p, '_embedded.wp:featuredmedia.0.source_url'),
                 'excerpt' => Str::limit(strip_tags((string) data_get($p, 'excerpt.rendered', '')), 160),
                 'date' => Carbon::parse($p['date'])->translatedFormat('d M Y'),
@@ -35,13 +38,14 @@ class HomeController extends Controller
             fn($p) => [
                 'id' => $p['id'],
                 'title' => strip_tags(data_get($p, 'title.rendered', 'Tanpa Judul')),
+                'link' => $p['link'],
                 'image' => data_get($p, '_embedded.wp:featuredmedia.0.source_url'),
                 'excerpt' => Str::limit(strip_tags((string) data_get($p, 'excerpt.rendered', '')), 160),
                 'date' => Carbon::parse($p['date'])->translatedFormat('d M Y'),
             ],
         );
 
-        return view('frontend.home', compact('berita', 'pengumuman', 'kategoris'));
+        return view('frontend.home', compact('berita', 'pengumuman', 'kategoris', 'carousel'));
     }
 
     public function read(string $id)
