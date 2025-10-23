@@ -51,7 +51,7 @@
                     <div class="form-group position-relative">
                         <label>Password</label>
                         <input type="password" class="form-control" name="password" id="password"
-                            placeholder="Kosongkan kalau tidah ubah password">
+                            placeholder="kosongkan kalau tidak ubah password">
                         <!-- Ikon Mata -->
                         <span class="position-absolute" style="right:10px; top:38px; cursor:pointer;"
                             onclick="this.previousElementSibling.type = this.previousElementSibling.type === 'password' ? 'text' : 'password';
