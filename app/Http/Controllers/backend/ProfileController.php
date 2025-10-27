@@ -22,7 +22,7 @@ class ProfileController extends Controller
             'name' => 'required',
             'username' => 'required|string|max:255|unique:users,username,' . $id,
             'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:8|confirmed',
+            'password' => 'nullable|string|min:6|confirmed',
             'current_password' => 'required', // wajib isi password lama
         ]);
 
