@@ -15,4 +15,7 @@
         @endauth
     </div>
 
+    <button id="toggle-dark-mode">
+        <i class="bi bi-moon-fill"></i>
+    </button>
 </header>

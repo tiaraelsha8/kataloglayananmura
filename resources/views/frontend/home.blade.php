@@ -113,19 +113,22 @@
             font-weight: 600;
             color: #000;
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 1rem;
             transition: color 0.3s ease;
         }
 
         .service-item:hover .service-name {
-            color: #08075a;
+            background: linear-gradient(to right, #141381, #2321c3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.4s ease;
         }
 
         /* === Berita === */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            gap: 28px;
         }
 
         .card-wrapper {
@@ -154,8 +157,12 @@
         }
 
         .card-body {
+            padding: 14px 18px 18px 18px;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+            text-align: left;
         }
 
         .card-date {
@@ -176,21 +183,11 @@
             position: relative;
         }
 
-        .card-link::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -2px;
-            width: 100%;
-            height: 2px;
-            background: currentColor;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.25s ease;
-        }
-
-        .card-link:hover::after {
-            transform: scaleX(1);
+        .card-link:hover {
+            background: linear-gradient(to right, #141381, #2321c3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.4s ease;
         }
 
         .card-excerpt {
@@ -217,15 +214,14 @@
         /* === Pengumuman === */
         .announcement-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
         }
 
         .announcement-card {
-            height: 100%;
-            border: 0;
-            border-radius: 14px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
             overflow: hidden;
             display: flex;
@@ -233,50 +229,71 @@
         }
 
         .announcement-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
         }
 
         .announcement-img {
             width: 100%;
-            height: 180px;
+            height: 190px;
             object-fit: cover;
-            border-top-left-radius: 14px;
-            border-top-right-radius: 14px;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
         }
 
         .announcement-body {
+            padding: 14px 18px 18px 18px;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+            text-align: left;
         }
 
         .announcement-date {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #888;
-            margin-bottom: 4px;
-        }
-
-        .announcement-title {
-            font-size: 1rem;
-            font-weight: 600;
             margin-bottom: 6px;
         }
 
-        .announcement-link {
-            text-decoration: none;
+        .announcement-title {
             color: #000;
+            text-decoration: none;
             position: relative;
-            display: inline-block;
         }
 
-        .announcement-link:hover {
-            text-decoration: none;
+        .announcement-title :hover {
+            background: linear-gradient(to right, #141381, #2321c3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.4s ease;
+        }
+
+        .announcement-link {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #000;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 2.8em;
         }
 
         .announcement-excerpt {
-            color: #6c757d;
-            font-size: 0.95rem;
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.4;
             margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 4.2em;
         }
     </style>
 
@@ -292,49 +309,49 @@
         @endforelse
     </div>
 
-{{-- === Kategori Layanan === --}}
-<div>
-    <h2 class="section-title">Layanan</h2>
-</div>
-<section class="global-section">
-    <div class="service-grid">
-        @foreach ($kategoris as $item)
-            @php $slug = Str::slug($item['nama']); @endphp
-            <a href="{{ route('Layanan.read', $item->id) }}" class="service-item">
-                <img
-                    src="{{ $item->foto ? asset('storage/kategori/' . $item->foto) : asset('asset/lambang_mura.png') }}">
-                <p class="service-name">{{ $item->nama_kategori }}</p>
-            </a>
-        @endforeach
+    {{-- === Kategori Layanan === --}}
+    <div>
+        <h2 class="section-title">Layanan</h2>
     </div>
-</section>
+    <section class="global-section">
+        <div class="service-grid">
+            @foreach ($kategoris as $item)
+                @php $slug = Str::slug($item['nama']); @endphp
+                <a href="{{ route('Layanan.read', $item->id) }}" class="service-item">
+                    <img
+                        src="{{ $item->foto ? asset('storage/kategori/' . $item->foto) : asset('asset/lambang_mura.png') }}">
+                    <p class="service-name">{{ $item->nama_kategori }}</p>
+                </a>
+            @endforeach
+        </div>
+    </section>
 
-{{-- === Berita === --}}
-<div>
-    <h2 class="section-title">Berita Terbaru Murung Raya</h2>
-</div>
-<section class="global-section">
-    <div class="card-grid">
-        @forelse($berita ?? [] as $it)
-            <div class="card-wrapper" data-aos="fade-up">
-                <div class="card card-elev">
-                    @if ($it['image'])
-                        <img src="{{ $it['image'] }}" class="card-img-top" alt="{{ $it['title'] }}" loading="lazy">
-                    @endif
-                    <div class="card-body">
-                        <div class="card-date">{{ $it['date'] }}</div>
-                        <h2 class="card-title clamp-2">
-                            <a href="" class="card-link">{{ $it['title'] }}</a>
-                        </h2>
-                        <p class="card-excerpt clamp-3">{{ $it['excerpt'] }}</p>
+    {{-- === Berita === --}}
+    <div>
+        <h2 class="section-title">Berita Terbaru Murung Raya</h2>
+    </div>
+    <section class="global-section">
+        <div class="card-grid">
+            @forelse($berita ?? [] as $it)
+                <div class="card-wrapper" data-aos="fade-up">
+                    <div class="card card-elev">
+                        @if ($it['image'])
+                            <img src="{{ $it['image'] }}" class="card-img-top" alt="{{ $it['title'] }}" loading="lazy">
+                        @endif
+                        <div class="card-body">
+                            <div class="card-date">{{ $it['date'] }}</div>
+                            <h2 class="card-title clamp-2">
+                                <a href="" class="card-link">{{ $it['title'] }}</a>
+                            </h2>
+                            <p class="card-excerpt clamp-3">{{ $it['excerpt'] }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @empty
-            <p class="text-center">Belum ada berita.</p>
-        @endforelse
-    </div>
-</section>
+            @empty
+                <p class="text-center">Belum ada berita.</p>
+            @endforelse
+        </div>
+    </section>
 
     {{-- === Pengumuman === --}}
     <div>
@@ -364,43 +381,43 @@
         </div>
     </section>
 
-{{-- === Script AOS === --}}
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
-    AOS.init({
-        once: true,
-        duration: 650,
-        offset: 80,
-        easing: 'ease-out-cubic'
-    });
-
-    // === Carousel ===
-    document.addEventListener("DOMContentLoaded", () => {
-        const slides = document.querySelectorAll(".carousel-slide");
-        let index = 0;
-        setInterval(() => {
-            slides[index].classList.remove("active");
-            index = (index + 1) % slides.length;
-            slides[index].classList.add("active");
-        }, 4000);
-    });
-
-    document.addEventListener('beforeunload', () => {
-        document.querySelectorAll('.icon-item').forEach(icon => {
-            icon.style.animation = 'disappearToCenter 0.5s ease forwards';
+    {{-- === Script AOS === --}}
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            duration: 650,
+            offset: 80,
+            easing: 'ease-out-cubic'
         });
-    });
 
-    // Animasi muncul untuk kategori layanan
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => entry.target.classList.add('visible'), i * 100);
-            }
+        // === Carousel ===
+        document.addEventListener("DOMContentLoaded", () => {
+            const slides = document.querySelectorAll(".carousel-slide");
+            let index = 0;
+            setInterval(() => {
+                slides[index].classList.remove("active");
+                index = (index + 1) % slides.length;
+                slides[index].classList.add("active");
+            }, 4000);
         });
-    }, {
-        threshold: 0.2
-    });
-    document.querySelectorAll('.service-item').forEach(item => observer.observe(item));
-</script>
+
+        document.addEventListener('beforeunload', () => {
+            document.querySelectorAll('.icon-item').forEach(icon => {
+                icon.style.animation = 'disappearToCenter 0.5s ease forwards';
+            });
+        });
+
+        // Animasi muncul untuk kategori layanan
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 100);
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+        document.querySelectorAll('.service-item').forEach(item => observer.observe(item));
+    </script>
 @endsection
