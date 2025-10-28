@@ -48,30 +48,58 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
-                            <div class="form-group">
+                            <div class="form-group position-relative">
                                 <label>Password Lama</label>
-                                <input type="password" name="current_password" class="form-control" required
+                                <input type="password" class="form-control" name="current_password" id="password"
                                     placeholder="isikan password lama saat mengubah email,username,nama,password">
+                                <!-- Ikon Mata -->
+                                <span class="position-absolute" style="right:10px; top:38px; cursor:pointer;"
+                                    onclick="this.previousElementSibling.type = this.previousElementSibling.type === 'password' ? 'text' : 'password';
+                 this.innerHTML = this.previousElementSibling.type === 'password' 
+                    ? '<i class=\'fas fa-eye\'></i>' 
+                    : '<i class=\'fas fa-eye-slash\'></i>';">
+                                    <i class="fas fa-eye"></i>
+                                </span>
                             </div>
+
                             @error('current_password')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="alert alert-danger mt-2">{{ $message }}</div>
                             @enderror
 
-                            <div class="form-group">
+                            <div class="form-group position-relative">
                                 <label>Password Baru</label>
-                                <input type="password" class="form-control" name="password"
-                                    placeholder="Kosongkan jika tidak ingin mengubah password">
+                                <input type="password" class="form-control" name="password" id="password"
+                                    placeholder="kosongkan jika tidak ingin mengubah password">
+                                <!-- Ikon Mata -->
+                                <span class="position-absolute" style="right:10px; top:38px; cursor:pointer;"
+                                    onclick="this.previousElementSibling.type = this.previousElementSibling.type === 'password' ? 'text' : 'password';
+                 this.innerHTML = this.previousElementSibling.type === 'password' 
+                    ? '<i class=\'fas fa-eye\'></i>' 
+                    : '<i class=\'fas fa-eye-slash\'></i>';">
+                                    <i class="fas fa-eye"></i>
+                                </span>
                             </div>
+
                             @error('password')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="alert alert-danger mt-2">{{ $message }}</div>
                             @enderror
 
-                            <div class="form-group">
-                                <label>Konfirmasi Password </label>
-                                <input type="password" class="form-control" placeholder="isikan jika mengubah password" name="password_confirmation">
+                            <div class="form-group position-relative">
+                                <label>Konfirmasi Password</label>
+                                <input type="password" class="form-control" name="password_confirmation" id="password"
+                                    placeholder="isikan jika mengubah password">
+                                <!-- Ikon Mata -->
+                                <span class="position-absolute" style="right:10px; top:38px; cursor:pointer;"
+                                    onclick="this.previousElementSibling.type = this.previousElementSibling.type === 'password' ? 'text' : 'password';
+                 this.innerHTML = this.previousElementSibling.type === 'password' 
+                    ? '<i class=\'fas fa-eye\'></i>' 
+                    : '<i class=\'fas fa-eye-slash\'></i>';">
+                                    <i class="fas fa-eye"></i>
+                                </span>
                             </div>
+
                             @error('password_confirmation')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="alert alert-danger mt-2">{{ $message }}</div>
                             @enderror
 
                         </div>

@@ -5,19 +5,17 @@
 @endsection
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
-@if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
     <div class="card">
         <div class="card-header">
@@ -49,12 +47,22 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
-                    <div class="form-group">
+                    <div class="form-group position-relative">
                         <label>Password</label>
-                        <input type="password" class="form-control" name="password" placeholder="Isikan Password">
+                        <input type="password" class="form-control" name="password" id="password"
+                            placeholder="Isikan Password">
+                        <!-- Ikon Mata -->
+                        <span class="position-absolute" style="right:10px; top:38px; cursor:pointer;"
+                            onclick="this.previousElementSibling.type = this.previousElementSibling.type === 'password' ? 'text' : 'password';
+                 this.innerHTML = this.previousElementSibling.type === 'password' 
+                    ? '<i class=\'fas fa-eye\'></i>' 
+                    : '<i class=\'fas fa-eye-slash\'></i>';">
+                            <i class="fas fa-eye"></i>
+                        </span>
                     </div>
+
                     @error('password')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <div class="alert alert-danger mt-2">{{ $message }}</div>
                     @enderror
 
                     <div class="form-group">

@@ -10,20 +10,25 @@
         <!-- Main row -->
         <div class="row">
 
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-danger">
-                    <div class="inner">
-                        <h3>{{ $jumlahadmin }}</h3>
+            @auth
+                @if (Auth::user()->role === 'superadmin')
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>{{ $jumlahadmin }}</h3>
 
-                        <p>Data Admin</p>
+                                <p>Data Admin</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+                        </div>
                     </div>
-                    <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
-                    </div>
-                    {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
-                </div>
-            </div>
+                @endif
+            @endauth
+
 
             <div class="col-lg-3 col-6">
                 <!-- small box -->
