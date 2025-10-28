@@ -281,16 +281,16 @@
     </style>
 
     {{-- === Carousel === --}}
-@section('carousel')
-    @forelse ($carousel as $item)
-        <div class="carousel-slide">
-            <img src="{{ $item->foto ? asset('storage/carousel/' . $item->foto) : asset('asset/lambang_mura.png') }}"
-                alt="{{ $item->id }}">
-        </div>
-    @empty
-        <p>Belum ada data</p>
-    @endforelse
-@endsection
+    <div class="carousel-container">
+        @forelse ($carousel as $item)
+            <div class="carousel-slide">
+                <img src="{{ $item->foto ? asset('storage/carousel/' . $item->foto) : asset('asset/lambang_mura.png') }}"
+                    alt="{{ $item->id }}">
+            </div>
+        @empty
+            <p>Belum ada data</p>
+        @endforelse
+    </div>
 
 {{-- === Kategori Layanan === --}}
 <div>
@@ -336,33 +336,33 @@
     </div>
 </section>
 
-{{-- === Pengumuman === --}}
-<div>
-    <h2 class="section-title">Pengumuman Terbaru Murung Raya</h2>
-</div>
-<section class="global-section">
-    <div class="announcement-grid">
-        @forelse($pengumuman ?? [] as $it)
-            <div class="card-wrapper" data-aos="fade-up">
-                <div class="announcement-card">
-                    @if ($it['image'])
-                        <img src="{{ $it['image'] }}" alt="{{ $it['title'] }}" loading="lazy"
-                            class="announcement-img">
-                    @endif
-                    <div class="announcement-body">
-                        <div class="announcement-date">{{ $it['date'] }}</div>
-                        <h2 class="announcement-title">
-                            <a href="" class="announcement-link">{{ $it['title'] }}</a>
-                        </h2>
-                        <p class="announcement-excerpt">{{ $it['excerpt'] }}</p>
+    {{-- === Pengumuman === --}}
+    <div>
+        <h2 class="section-title">Pengumuman Terbaru Murung Raya</h2>
+    </div>
+    <section class="global-section">
+        <div class="announcement-grid">
+            @forelse($pengumuman ?? [] as $it)
+                <div class="card-wrapper" data-aos="fade-up">
+                    <div class="announcement-card">
+                        @if ($it['image'])
+                            <img src="{{ $it['image'] }}" alt="{{ $it['title'] }}" loading="lazy"
+                                class="announcement-img">
+                        @endif
+                        <div class="announcement-body">
+                            <div class="announcement-date">{{ $it['date'] }}</div>
+                            <h2 class="announcement-title">
+                                <a href="" class="announcement-link">{{ $it['title'] }}</a>
+                            </h2>
+                            <p class="announcement-excerpt">{{ $it['excerpt'] }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @empty
-            <p class="text-center">Belum ada pengumuman.</p>
-        @endforelse
-    </div>
-</section>
+            @empty
+                <p class="text-center">Belum ada pengumuman.</p>
+            @endforelse
+        </div>
+    </section>
 
 {{-- === Script AOS === --}}
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
