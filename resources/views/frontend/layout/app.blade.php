@@ -19,7 +19,7 @@
             margin: 0;
             padding: 0;
             line-height: 1.7;
-            background-color: #f9f9fb;
+            background: linear-gradient(145deg, #ffffff, #f9f9fb, #eef2f8);
         }
 
         h1,
@@ -177,22 +177,95 @@
             right: 30px;
             top: 50%;
             transform: translateY(-50%);
-            color: white;
-            background: none;
-            border: none;
-            outline: none;
-            width: auto;
-            height: auto;
+            width: 52px;
+            height: 28px;
+            background: linear-gradient(145deg, #e8eafc, #d8dbf7);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            padding: 4px;
             cursor: pointer;
-            font-size: 20px;
+            box-shadow:
+                inset 1px 1px 2px rgba(255, 255, 255, 0.6),
+                inset -2px -2px 4px rgba(0, 0, 0, 0.08),
+                0 4px 10px rgba(0, 0, 0, 0.06);
+            transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            overflow: hidden;
+            z-index: 999;
+        }
+
+        #toggle-dark-mode i {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.3s ease, color 0.3s ease;
+            background: radial-gradient(circle at 30% 30%, rgba(100, 140, 255, 0.3), rgba(230, 230, 255, 1));
+            color: #141381;
+            font-size: 14px;
+            box-shadow:
+                inset 0 2px 4px rgba(255, 255, 255, 0.6),
+                0 2px 6px rgba(0, 0, 0, 0.15);
+            transition:
+                background 0.4s ease,
+                color 0.4s ease,
+                box-shadow 0.4s ease,
+                transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+                opacity 0.4s ease;
+            transform: translateX(0);
         }
 
-        #toggle-dark-mode:hover {
-            transform: translateY(-50%) scale(1.15);
+        body.dark-mode #toggle-dark-mode {
+            background: radial-gradient(circle at 30% 30%, rgba(50, 80, 200, 0.2), rgba(10, 15, 30, 1));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow:
+                inset 0 2px 6px rgba(255, 255, 255, 0.05),
+                inset 0 -3px 8px rgba(0, 0, 0, 0.7),
+                0 0 10px rgba(50, 100, 255, 0.25);
+        }
+
+        body.dark-mode #toggle-dark-mode i {
+            background: radial-gradient(circle at 30% 30%, rgba(50, 80, 200, 0.2), rgba(10, 15, 30, 1));
+            box-shadow:
+                inset 0 2px 6px rgba(255, 255, 255, 0.05),
+                inset 0 -3px 8px rgba(0, 0, 0, 0.7),
+                0 0 10px rgba(50, 100, 255, 0.25);
+            color: #cfd2ff;
+            transform: translateX(24px) rotate(360deg);
+        }
+
+        #toggle-dark-mode:hover i {
+            transform: translateX(0) scale(1.1);
+            box-shadow: 0 0 12px rgba(50, 100, 255, 0.3);
+        }
+
+        body.dark-mode #toggle-dark-mode:hover i {
+            transform: translateX(24px) scale(1.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        body,
+        * {
+            transition:
+                background-color 0.6s ease,
+                color 0.6s ease,
+                border-color 0.6s ease,
+                box-shadow 0.6s ease;
+        }
+
+        body.dark-mode #toggle-dark-mode::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 50px;
+            background: radial-gradient(circle at 70% 30%, rgba(50, 100, 255, 0.2), transparent 70%);
+            filter: blur(8px);
+            opacity: 0.7;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
         }
 
         /* === Halaman Layanan === */
@@ -857,18 +930,43 @@
         };
 
         // Dark Mode
-        const toggleButton = document.getElementById('toggle-dark-mode');
-        toggleButton.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('toggle-dark-mode');
             const icon = toggleButton.querySelector('i');
-            if (document.body.classList.contains('dark-mode')) {
+
+            // Ambil mode tersimpan
+            const savedMode = localStorage.getItem('themeMode');
+
+            if (savedMode === 'dark') {
+                document.body.classList.add('dark-mode');
                 icon.classList.replace('bi-moon-fill', 'bi-sun-fill');
+                icon.style.transform = 'translateX(24px)';
             } else {
+                document.body.classList.remove('dark-mode');
                 icon.classList.replace('bi-sun-fill', 'bi-moon-fill');
+                icon.style.transform = 'translateX(0)';
             }
+
+            // Klik toggle
+            toggleButton.addEventListener('click', () => {
+                const isDark = document.body.classList.toggle('dark-mode');
+
+                // Transisi ikon lembut dan sinkron
+                icon.style.opacity = 0;
+                icon.style.transform += ' scale(0.8) rotate(-90deg)';
+
+                setTimeout(() => {
+                    icon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+                    icon.style.transform = isDark ?
+                        'translateX(24px) rotate(0deg)' :
+                        'translateX(0) rotate(0deg)';
+                    icon.style.opacity = 1;
+                    localStorage.setItem('themeMode', isDark ? 'dark' : 'light');
+                }, 250);
+            });
         });
 
-        // Efek Perubahan Saat Scroll
+        // Efek Perubahan Saat Scroll Header
         window.addEventListener('scroll', function() {
             const header = document.querySelector('.main-header');
             if (window.scrollY > 50) {

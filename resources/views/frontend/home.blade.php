@@ -65,10 +65,9 @@
             border: none;
             cursor: pointer;
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(40px) scale(0.96);
             text-align: center;
-            transition: all 0.3s ease;
-            animation: appearFromCenter 0.6s ease forwards;
+            transition: all 0.6s ease;
         }
 
         .service-item:hover {
@@ -77,7 +76,7 @@
 
         .service-item.visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
 
         .service-item img {
@@ -127,26 +126,24 @@
         /* === Berita === */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 28px;
         }
 
-        .card-wrapper {
-            display: flex;
-            justify-content: center;
-        }
-
         .card-elev {
-            border: 0;
-            border-radius: 14px;
-            transition: transform 0.25s, box-shadow 0.25s;
-            overflow: hidden;
             background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: none;
         }
 
         .card-elev:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
         }
 
         .card-img-top {
@@ -409,15 +406,24 @@
         });
 
         // Animasi muncul untuk kategori layanan
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => entry.target.classList.add('visible'), i * 100);
-                }
+        document.addEventListener("DOMContentLoaded", () => {
+            const serviceItems = document.querySelectorAll('.service-item');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, i) => {
+                    if (entry.isIntersecting) {
+                        // Delay antar item biar muncul berurutan halus
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, i * 120);
+                        observer.unobserve(entry.target); // stop observe setelah muncul
+                    }
+                });
+            }, {
+                threshold: 0.2
             });
-        }, {
-            threshold: 0.2
+
+            serviceItems.forEach(item => observer.observe(item));
         });
-        document.querySelectorAll('.service-item').forEach(item => observer.observe(item));
     </script>
 @endsection
