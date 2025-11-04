@@ -16,7 +16,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('templateadmin/dist/css/adminlte.min.css') }}">
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('image/logo/logo-komdigi.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('image/tingang.png') }}">
     <!-- Google reCAPTCHA Script -->
     {!! NoCaptcha::renderJs() !!}
 </head>
@@ -27,9 +27,11 @@
         <div class="card-body login-card-body">
             <div class="login-box">
                 <div class="login-logo">
-                    <a href=""><b>Katalog Layanan</b></a>
+                    <a href="" style="font-size: 25px; line-height: 1.3; text-align: center; display: inline-block;">
+                        <b>Tempat Informasi dan<br>Gerbang Pelayanan Digital</b>
+                    </a>
                     <div class="text-center mt-2">
-                        <img src="" alt="Logo" style="height: 80px;">
+                        <img src="{{ asset('image/tingang.png') }}" alt="Logo" style="height: 80px;">
                     </div>
                 </div>
 
