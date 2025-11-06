@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KATALOG LAYANAN</title>
 
+     <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('image/tingang.png') }}">
+
     <!-- Font modern & profesional -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -120,7 +123,7 @@
 
         /* ========== HEADER PREMIUM DYNAMIC REFLECTIVE (LIGHT MODE) ========== */
         .main-header {
-            background: linear-gradient(90deg, #0e0d68, #08075a, #0e0d68);
+            background: linear-gradient(90deg, #5351ff, #5351ff, #5351ff);
             background-size: 300% 300%;
             color: white;
             display: flex;
@@ -167,7 +170,7 @@
         }
 
         .main-header.scrolled {
-            background: linear-gradient(90deg, #0e0d68, #08075a, #0e0d68);
+            background: linear-gradient(90deg, #5351ff, #5351ff, #5351ff);
             padding: 15px 0;
             box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
         }
@@ -729,7 +732,7 @@
 
         /* ========== Footer ========== */
         .custom-footer {
-            background: linear-gradient(90deg, #0e0d68, #08075a, #0e0d68);
+            background: linear-gradient(90deg, #5351ff, #5351ff, #5351ff);
             padding: 15px 0;
             color: white;
             padding: 40px 60px 20px;
