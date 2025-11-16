@@ -1,9 +1,9 @@
 <header class="main-header">
-    <div class="logo-container" style="display: flex; align-items: center; gap: 10px;">
-        <img src="{{ asset('image/tingang.png') }}" alt="Logo" class="logo" style="height: 60px; width: auto;">
+    <div class="logo-container">
+        <img src="{{ asset('image/tingang 2.png') }}" alt="Logo" class="logo" >
 
-        <a href="/" style="font-size: 16px; line-height: 1.2; color: #ffffff; text-decoration: none;">
-            <b>Tempat Informasi dan<br>Gerbang Pelayanan Digital</b>
+        <a href="/">
+            Tempat Informasi dan<br>Gerbang Pelayanan Digital
         </a>
     </div>
     <div class="nav-center">

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KATALOG LAYANAN</title>
 
-     <!-- Favicon -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('image/tingang.png') }}">
 
     <!-- Font modern & profesional -->
@@ -123,7 +123,7 @@
 
         /* ========== HEADER PREMIUM DYNAMIC REFLECTIVE (LIGHT MODE) ========== */
         .main-header {
-            background: linear-gradient(90deg, #5351ff, #5351ff, #5351ff);
+            background: linear-gradient(90deg, #0e0d68, #08075a, #0e0d68);
             background-size: 300% 300%;
             color: white;
             display: flex;
@@ -145,14 +145,10 @@
         .main-header::before {
             content: "";
             position: absolute;
-            bottom: -10px;
+            top: 0;
             left: 0;
-            width: 100%;
-            height: 25px;
-            background: linear-gradient(to top, rgba(255, 255, 255, 0.15), transparent);
-            opacity: 0.8;
-            filter: blur(10px);
-            pointer-events: none;
+            width: 15%;
+            height: 100%;
         }
 
         .main-header::after {
@@ -170,7 +166,7 @@
         }
 
         .main-header.scrolled {
-            background: linear-gradient(90deg, #5351ff, #5351ff, #5351ff);
+            background: linear-gradient(90deg, #0e0d68, #08075a, #0e0d68);
             padding: 15px 0;
             box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
         }
@@ -184,11 +180,27 @@
             left: 30px;
             display: flex;
             align-items: center;
+            gap: 10px;
+            z-index: 2;
         }
 
         .logo {
             height: 60px;
+            mix-blend-mode: lighten;
             width: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-container a {
+            position: relative;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.2;
+            letter-spacing: 0.6px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
         }
 
         .nav-center {
@@ -200,7 +212,6 @@
             font-weight: 500;
             font-size: 18px;
             letter-spacing: 0.6px;
-            margin: 0 18px;
             position: relative;
             transition: color 0.3s ease, transform 0.3s ease, letter-spacing 0.35s ease;
         }
@@ -429,10 +440,6 @@
             background-size: 300% 300%;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
             animation: gradientFlow 10s ease infinite;
-        }
-
-        body.dark-mode .main-header::before {
-            background: linear-gradient(to top, rgba(255, 255, 255, 0.08), transparent);
         }
 
         body.dark-mode .main-header::after {
@@ -732,7 +739,7 @@
 
         /* ========== Footer ========== */
         .custom-footer {
-            background: linear-gradient(90deg, #5351ff, #5351ff, #5351ff);
+            background: linear-gradient(90deg, #0e0d68, #08075a, #0e0d68);
             padding: 15px 0;
             color: white;
             padding: 40px 60px 20px;
@@ -901,7 +908,11 @@
             }
 
             .logo {
-                height: 42px;
+                height: 37px;
+            }
+
+            .logo-container a{
+                font-size: 10px;
             }
 
             .nav-center {
@@ -914,7 +925,7 @@
             }
 
             .nav-link {
-                font-size: 14px;
+                display: none !important;
             }
 
             #toggle-dark-mode {
@@ -1079,7 +1090,7 @@
 
         @media (max-width: 576px) {
             .logo {
-                height: 42px;
+                height: 37px;
             }
 
             #toggle-dark-mode {
