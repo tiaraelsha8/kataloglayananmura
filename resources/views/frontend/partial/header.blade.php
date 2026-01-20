@@ -1,0 +1,25 @@
+<header class="main-header">
+    <div class="logo-container">
+        <img src="{{ asset('image/tingang 2.png') }}" alt="Logo" class="logo" >
+
+        <a href="/">
+            Tempat Informasi dan<br>Gerbang Pelayanan Digital
+        </a>
+    </div>
+    <div class="nav-center">
+        <a href="{{ route('beranda') }}" class="nav-link">Beranda</a>
+    </div>
+
+    <div class="nav-center">
+        @auth
+            {{-- Cek role user --}}
+            @if (Auth::user()->role === 'admin' || Auth::user()->role === 'superadmin')
+                <a href="{{ route('backend.dashboard') }}" class="nav-link">Dashboard</a>
+            @endif
+        @endauth
+    </div>
+
+    <button id="toggle-dark-mode">
+        <i class="bi bi-moon-fill"></i>
+    </button>
+</header>
