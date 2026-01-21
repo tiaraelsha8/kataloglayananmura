@@ -549,8 +549,7 @@
             @foreach ($kategoris as $item)
                 @php $slug = Str::slug($item['nama']); @endphp
                 <a href="{{ route('Layanan.read', $item->id) }}" class="service-item">
-                    <img
-                        src="{{ $item->foto ? asset('storage/kategori/' . $item->foto) : asset('asset/lambang_mura.png') }}">
+                    <img src="{{ $item->foto ? asset('storage/kategori/' . $item->foto) : asset('asset/lambang_mura.png') }}">
                     <p class="service-name">{{ $item->nama_kategori }}</p>
                 </a>
             @endforeach
@@ -572,7 +571,7 @@
                         <div class="card-body">
                             <div class="card-date">{{ $it['date'] }}</div>
                             <h2 class="card-title clamp-2">
-                                <a href="" class="card-link">{{ $it['title'] }}</a>
+                                <a href="{{ $it['link'] }}" class="card-link">{{ $it['title'] }}</a>
                             </h2>
                             <p class="card-excerpt clamp-3">{{ $it['excerpt'] }}</p>
                         </div>
@@ -594,13 +593,12 @@
                 <div class="card-wrapper" data-aos="fade-up">
                     <div class="announcement-card">
                         @if ($it['image'])
-                            <img src="{{ $it['image'] }}" alt="{{ $it['title'] }}" loading="lazy"
-                                class="announcement-img">
+                            <img src="{{ $it['image'] }}" alt="{{ $it['title'] }}" loading="lazy" class="announcement-img">
                         @endif
                         <div class="announcement-body">
                             <div class="announcement-date">{{ $it['date'] }}</div>
                             <h2 class="announcement-title">
-                                <a href="" class="announcement-link">{{ $it['title'] }}</a>
+                                <a href="{{ $it['link'] }}" class="announcement-link">{{ $it['title'] }}</a>
                             </h2>
                             <p class="announcement-excerpt">{{ $it['excerpt'] }}</p>
                         </div>
